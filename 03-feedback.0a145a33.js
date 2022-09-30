@@ -1,2 +1,0 @@
-var refs={form:document.querySelector(".feedback-form"),textarea:document.querySelector(".feedback-form textarea"),button:document.querySelector(".feedback-form button")};function onFormSubmit(e){e.preventDefault(),console.log("send form"),e.currentTarget.reset()}function onTextareaInput(e){var t=e.currentTarget.value;localStorage.setItem("feedback-msg",t)}refs.form.addEventListener("submit",onFormSubmit),refs.textarea.addEventListener("input",onTextareaInput),console.log(1);
-//# sourceMappingURL=03-feedback.0a145a33.js.map

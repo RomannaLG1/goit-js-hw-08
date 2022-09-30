@@ -1,1 +1,0 @@
-{"mappings":"AAAAA,QAAQC,IAAI,GAEZD,QAAQC,IAAIC","sources":["src/js/02-video.js"],"sourcesContent":["console.log(1);\n\nconsole.log(localStorage);\n"],"names":["console","log","localStorage"],"version":3,"file":"02-video.b9290718.js.map"}

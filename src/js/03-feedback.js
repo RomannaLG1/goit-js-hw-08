@@ -1,8 +1,6 @@
 
 import throttle from 'lodash.throttle';
-const STORAGE_KEY = 'feedback-msg';
-
-const formData = {};
+const STORAGE_KEY = 'feedback-form-state';
 
 const refs = {
   form: document.querySelector('.feedback-form'),
@@ -11,39 +9,39 @@ const refs = {
   button: document.querySelector('.feedback-form button'),
 };
 
+const formData = {};
 populateTextarea();
 
+
 refs.form.addEventListener('submit', onFormSubmit);
-refs.textarea.addEventListener('input', throttle(onTextareaInput, 500));
-refs.input.addEventListener('input', throttle(onTextareaInput, 500));
+refs.textarea.addEventListener('input', throttle(onFormInput, 500));
+refs.input.addEventListener('input', throttle(onFormInput, 500));
 
 refs.form.addEventListener('input', e => {
-  
-  formData[e.target.name] = e.target.value;
-  console.log(formData);
+    formData[e.target.name] = e.target.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 })
 
 function onFormSubmit(evt) {
   evt.preventDefault();
+  if (refs.textarea.value === "" || refs.input.value === "") {
+    return alert("Dear Catherine, please fill in all the fields!");
+  }
  
   evt.currentTarget.reset();
-  localStorage.removeItem(STORAGE_KEY);
-   console.log('send form');
+  console.log(localStorage.getItem(STORAGE_KEY, JSON.stringify(formData)));
+
 }
 
-function onTextareaInput(evt) {
-  // const message = evt.target.value;
-  // localStorage.setItem(STORAGE_KEY, message);
-
-  localStorage.setItem(JSON.stringify(formData));
+function onFormInput() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
 function populateTextarea() {
-  // const savedMessage = localStorage.getItem(STORAGE_KEY);
-  const savedMessage = JSON.parse(localStorage.getItem('formData'));
+  const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (savedMessage) {
-        refs.textarea.value = savedMessage;
-        refs.input.value = savedMessage;
+        refs.textarea.value = savedMessage['message'] || '';
+        refs.input.value = savedMessage['email'] || '';
   }
-  
 }
+

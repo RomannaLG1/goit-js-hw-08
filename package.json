@@ -20,7 +20,8 @@
   "dependencies": {
     "lodash.throttle": "^4.1.1",
     "modern-normalize": "^1.1.0",
-    "simplelightbox": "^2.10.3"
+    "simplelightbox": "^2.10.3",
+    "vimeo": "^2.1.1"
   },
   "devDependencies": {
     "@parcel/transformer-pug": "^2.6.0",

@@ -14,8 +14,8 @@ populateTextarea();
 
 
 refs.form.addEventListener('submit', onFormSubmit);
-refs.textarea.addEventListener('input', throttle(onFormInput, 500));
-refs.input.addEventListener('input', throttle(onFormInput, 500));
+refs.form.addEventListener('input', throttle(onFormInput, 500));
+
 
 refs.form.addEventListener('input', e => {
     formData[e.target.name] = e.target.value;
@@ -40,8 +40,9 @@ function onFormInput() {
 function populateTextarea() {
   const savedMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (savedMessage) {
-        refs.textarea.value = savedMessage['message'] || '';
-        refs.input.value = savedMessage['email'] || '';
+    Object.entries(savedMessage).forEach(([name, value]) => {
+      refs.form.elements[name].value = value;
+    });
   }
 }
 
